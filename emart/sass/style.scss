@@ -1,0 +1,202 @@
+@import "constant", "mixins", "header", "footer", "home", "product", "search",
+  "login-signup", "profile", "cart";
+
+body {
+  color: color(text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  font-family: "Noto Sans", sans-serif;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+h6,
+.h6,
+h5,
+.h5,
+h4,
+.h4,
+h3,
+.h3,
+h2,
+.h2,
+h1,
+.h1,
+p {
+  margin: 0;
+}
+
+.text-accent {
+  color: color(accent);
+}
+
+.text-theme,
+a,
+a:focus,
+a:hover {
+  color: color(theme);
+}
+
+.btn-primary {
+  @include btnTheme;
+}
+
+span.text-muted.txt-error {
+  color: red !important;
+  font-size: 12px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus {
+  background-color: color(theme);
+  box-shadow: none;
+}
+
+.form-control {
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 10px;
+  color: color(text) !important;
+  border: 1px solid #7c7c7c;
+}
+
+.form-control::placeholder {
+  color: color(text) !important;
+}
+
+.form-check-input:checked {
+  border-color: color(theme);
+}
+
+.form-check-input[type="radio"]:checked:after {
+  border-color: color(theme);
+  background-color: color(theme);
+}
+
+.form-check-input:checked:focus:before {
+  box-shadow: 0px 0px 0px 13px color(theme);
+}
+
+.form-check-input:checked:focus {
+  border-color: color(theme);
+}
+
+.form-outline .form-control {
+  height: 40px;
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+.form-outline textarea.form-control {
+  height: 150px;
+  overflow-y: auto;
+  padding: 10px;
+  line-height: 1.5;
+}
+
+.form-outline textarea.form-control {
+  resize: none;
+}
+
+.form-outline .form-control ~ .form-notch div {
+  border-color: #7c7c7c;
+}
+
+.form-outline .form-control ~ .form-label {
+  color: color(text) !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form-outline .form-control:focus ~ .form-label,
+.form-outline .form-control.active ~ .form-label {
+  padding-top: 0.37rem;
+}
+
+.form-control::placeholder {
+  color: color(text) !important;
+}
+
+.form-check-input[type="checkbox"]:checked,
+.form-check-input[type="checkbox"]:checked:focus {
+  background-color: color(theme);
+}
+
+.form-check-input:checked,
+.form-check-input[type="checkbox"]:indeterminate,
+.form-check-input:checked:focus {
+  border-color: color(theme);
+}
+
+.form-check-input:checked:focus:before {
+  box-shadow: 0px 0px 0px 13px color(theme);
+}
+
+.form-control:focus {
+  border-color: color(theme);
+  box-shadow: inset 0px 0px 0px 1px color(theme);
+}
+
+.form-outline .form-control:focus ~ .form-label {
+  color: color(theme) !important;
+  font-weight: 500;
+}
+
+.form-outline .form-control:focus ~ .form-notch .form-notch-leading {
+  border-color: color(theme);
+  box-shadow: -1px 0 0 0 color(theme), 0 1px 0 0 color(theme),
+    0 -1px 0 0 color(theme);
+}
+
+.form-outline .form-control:focus ~ .form-notch .form-notch-middle {
+  border-color: color(theme);
+  box-shadow: 0 1px 0 0 color(theme);
+  border-top: 1px solid transparent !important;
+}
+
+.form-outline .form-control:focus ~ .form-notch .form-notch-middle,
+.form-outline .form-control.active ~ .form-notch .form-notch-middle {
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid transparent !important;
+}
+.form-outline .form-control:focus ~ .form-notch .form-notch-trailing {
+  border-color: color(theme);
+  box-shadow: 1px 0 0 0 color(theme), 0 -1px 0 0 color(theme),
+    0 1px 0 0 color(theme);
+}
+
+.css-13cymwt-control {
+  font-size: 14px;
+  padding: 0;
+  min-height: 40px !important;
+  color: color(text) !important;
+  border-color: #7c7c7c !important;
+  border-radius: 0.25rem !important;
+
+  &:hover {
+    border-color: #7c7c7c !important;
+  }
+
+  .css-1jqq78o-placeholder,
+  .css-1dimb5e-singleValue {
+    color: color(text) !important;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .css-1u9des2-indicatorSeparator {
+    background-color: #7c7c7c;
+  }
+  .css-1xc3v61-indicatorContainer {
+    color: #7c7c7c;
+  }
+}

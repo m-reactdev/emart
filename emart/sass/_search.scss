@@ -1,0 +1,22 @@
+.search_block {
+  display: flex;
+  padding: 30px 0;
+  justify-content: space-between;
+  margin: 0 -20px;
+
+  .search_filter {
+    flex: 1;
+    padding: 0 20px;
+  }
+
+  .search_input {
+    flex: 3;
+    padding: 0 20px;
+    display: flex;
+
+    .btn {
+      margin-left: 10px;
+      border-radius: 5px;
+    }
+  }
+}

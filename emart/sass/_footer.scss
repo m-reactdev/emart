@@ -1,0 +1,52 @@
+.bg_footer {
+  background: color(gray);
+  color: color(text-light);
+  padding: 80px 0 20px;
+
+  p.copyright {
+    margin-top: 50px;
+    border-top: 1px solid;
+    text-align: center;
+    padding-top: 20px;
+    opacity: 0.5;
+  }
+}
+
+.flex_box {
+  @include flex(space-between, wrap);
+  align-items: flex-start;
+
+  > div {
+    flex: 1;
+  }
+
+  .info {
+    margin-right: 50px;
+
+    img {
+      width: 80px;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+  }
+
+  .top_useful_links {
+    ul {
+      li {
+        a {
+          padding: 3px 0;
+          display: block;
+          color: color(text-light);
+        }
+
+        &:first-child {
+          margin-bottom: 15px;
+          font-size: 16px;
+          color: color(White);
+        }
+      }
+    }
+  }
+}
