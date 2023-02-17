@@ -3,20 +3,15 @@ import {
   MDBCol,
   MDBContainer,
   MDBRow,
-  MDBBadge,
   MDBBtn,
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
   MDBInput,
+  MDBRadio,
 } from "mdb-react-ui-kit";
-import { Link, useNavigate } from "react-router-dom";
-import { MdDelete } from "react-icons/md";
+import {  useNavigate } from "react-router-dom";
 import Banner from "../components/Banner";
 import Image from "../assets/imgs/banner.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteCartItems,
   orderDone,
 } from "../redux/actions/all-actions/CartAction";
 import { toast } from "react-toastify";
@@ -94,7 +89,7 @@ const Checkout = () => {
         <div className="checkout_form">
           {cartItems.length > 0 ? (
             <MDBRow>
-              <MDBCol lg={8}>
+              <MDBCol xl={8}>
                 <div className="form-group">
                   <MDBInput
                     type="text"
@@ -147,8 +142,16 @@ const Checkout = () => {
                     name="postalCode"
                   />
                 </div>
+                <div className="form-group">
+                  <MDBRadio
+                    name="flexRadioDefault"
+                    id="flexRadioDefault2"
+                    label="Cash on delivery"
+                    defaultChecked
+                  />
+                </div>
               </MDBCol>
-              <MDBCol lg={4}>
+              <MDBCol xl={4}>
                 <div className="cart_totals">
                   <h2>Order Summary</h2>
                   <div className="sub_total">
@@ -156,7 +159,7 @@ const Checkout = () => {
                     <h3>${totalAmount}</h3>
                   </div>
                   <div className="sub_total">
-                    <h4>Delivery Charges</h4>
+                    <h4>Shipping</h4>
                     <h3>$10</h3>
                   </div>
 

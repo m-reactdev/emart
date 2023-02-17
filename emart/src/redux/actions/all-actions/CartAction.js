@@ -1,9 +1,10 @@
 import { toast } from "react-toastify";
+import { ADD_ITEM, DELETE_ITEM, FETCH_ITEM, ORDER_PLACED, RESET_ORDER, UPDATE_ITEM } from "../actions-types/ActionType";
 
 const fetchCartItems = () => {
   return (dispatch) => {
     dispatch({
-      type: "FETCH_ITEM",
+      type: FETCH_ITEM,
     });
   };
 };
@@ -21,7 +22,7 @@ const addCartItems = (item) => {
       theme: "light",
     });
     dispatch({
-      type: "ADD_ITEM",
+      type: ADD_ITEM,
       payload: item,
     });
   };
@@ -40,8 +41,42 @@ const deleteCartItems = (id) => {
       theme: "light",
     });
     dispatch({
-      type: "DELETE_ITEM",
+      type: DELETE_ITEM,
       payload: id,
+    });
+  };
+};
+
+const updateIncreaseItems = (index, cartItems, setTotalAmount) => {
+  return (dispatch) => {
+    const newCart = [...cartItems];
+    let price = 0;
+    newCart[index].quantity = newCart[index].quantity + 1;
+    newCart[index].price = newCart[index].quantity * newCart[index].unitPrice;
+    newCart.forEach((element) => {
+      price += element.price;
+    });
+    setTotalAmount(price);
+    dispatch({
+      type: UPDATE_ITEM,
+      payload: newCart,
+    });
+  };
+};
+
+const updateDecreaseItems = (index, cartItems, setTotalAmount) => {
+  return (dispatch) => {
+    const newCart = [...cartItems];
+    let price = 0;
+    newCart[index].quantity = newCart[index].quantity - 1;
+    newCart[index].price = newCart[index].quantity * newCart[index].unitPrice;
+    newCart.forEach((element) => {
+      price += element.price;
+    });
+    setTotalAmount(price);
+    dispatch({
+      type: UPDATE_ITEM,
+      payload: newCart,
     });
   };
 };
@@ -61,11 +96,33 @@ const orderDone = (item, navigate, cartItems) => {
 
     setTimeout(() => {
       dispatch({
-        type: "ORDER_PLACED",
+        type: ORDER_PLACED,
+        payload: {
+          item: item,
+          cartItems: cartItems,
+        },
       });
-      navigate("/success", { state: { item: item, cartItems: cartItems } });
+      navigate("/success");
     }, 2000);
   };
 };
 
-export { fetchCartItems, addCartItems, deleteCartItems, orderDone };
+const resetOrder = (navigate) => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_ORDER,
+    });
+
+    navigate("/");
+  };
+};
+
+export {
+  fetchCartItems,
+  addCartItems,
+  deleteCartItems,
+  updateIncreaseItems,
+  updateDecreaseItems,
+  orderDone,
+  resetOrder,
+};

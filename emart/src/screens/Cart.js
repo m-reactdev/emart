@@ -3,7 +3,6 @@ import {
   MDBCol,
   MDBContainer,
   MDBRow,
-  MDBBadge,
   MDBBtn,
   MDBTable,
   MDBTableHead,
@@ -14,40 +13,32 @@ import { MdDelete } from "react-icons/md";
 import Banner from "../components/Banner";
 import Image from "../assets/imgs/banner.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartItems } from "../redux/actions/all-actions/CartAction";
-import { toast } from "react-toastify";
+import {
+  deleteCartItems,
+  updateIncreaseItems,
+  updateDecreaseItems,
+} from "../redux/actions/all-actions/CartAction";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 const Cart = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
 
   const [totalAmount, setTotalAmount] = useState();
+
   let cartItems = useSelector(({ CartState }) => {
     return CartState.cartItems;
   });
 
-  let authUser = useSelector(({ AuthState }) => {
-    return AuthState.user;
-  });
+  const handleIncreaseQuantity = (index) => {
+    if (cartItems[index].quantity <= 9) {
+      dispatch(updateIncreaseItems(index, cartItems, setTotalAmount));
+    }
+  };
 
-  const gotoCheckout = () => {
-    if (authUser !== null) {
-      navigate("/checkout");
-    } else {
-      toast.info("You need to be logged in.", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
+  const handleDecreaseQuantity = (index) => {
+    if (cartItems[index].quantity >= 2) {
+      dispatch(updateDecreaseItems(index, cartItems, setTotalAmount));
     }
   };
 
@@ -68,8 +59,8 @@ const Cart = () => {
         <div className="cart_block">
           {cartItems.length > 0 ? (
             <MDBRow>
-              <MDBCol lg="9">
-                <MDBTable align="middle">
+              <MDBCol xl="9">
+                <MDBTable align="middle" responsive>
                   <MDBTableHead>
                     <tr>
                       <th scope="col">Image</th>
@@ -92,8 +83,22 @@ const Cart = () => {
                             />
                           </td>
                           <td>{item.title}</td>
-                          <td>${item.price}</td>
-                          <td>{item.quantity}</td>
+                          <td>{item.price}</td>
+                          <td>
+                            <div className="quantity">
+                              <Link
+                                onClick={() => handleDecreaseQuantity(index)}
+                              >
+                                <FaMinus />
+                              </Link>
+                              <span>{item.quantity}</span>
+                              <Link
+                                onClick={() => handleIncreaseQuantity(index)}
+                              >
+                                <FaPlus />
+                              </Link>
+                            </div>
+                          </td>
                           <td>
                             <Link
                               onClick={() =>
@@ -109,7 +114,7 @@ const Cart = () => {
                   </MDBTableBody>
                 </MDBTable>
               </MDBCol>
-              <MDBCol lg="3">
+              <MDBCol xl="3">
                 <div className="cart_totals">
                   <div className="sub_total">
                     <h4>Subtotal</h4>
@@ -117,7 +122,9 @@ const Cart = () => {
                   </div>
                   <p>Taxes and shipping will calculate in chaeckout.</p>
                   <div className="btns_block">
-                    <MDBBtn onClick={gotoCheckout}>Checkout</MDBBtn>
+                    <MDBBtn onClick={() => navigate("/checkout")}>
+                      Checkout
+                    </MDBBtn>
                     <MDBBtn onClick={() => navigate("/shop")}>
                       Continue Shopping
                     </MDBBtn>

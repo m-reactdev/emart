@@ -12,11 +12,21 @@
 
   ul.navbar-nav {
     align-items: center;
+    justify-content: center;
+
+    @include desktop-small {
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
 
     a.nav-link {
       font-weight: 600;
       font-size: 16px;
       position: relative;
+
+      @include phone {
+        font-size: 14px;
+      }
 
       span.itemSelected {
         position: absolute;
@@ -33,6 +43,10 @@
       }
     }
 
+    .cart_item {
+      margin-right: 10px;
+    }
+
     a.nav-link.active {
       color: color(theme);
     }
@@ -45,14 +59,42 @@
   }
 }
 
+@include desktop-small {
+  .navbar-collapse .navbar-nav {
+    padding-top: 20px;
+  }
+}
+
+.admin_block {
+  order: 2;
+
+  @include desktop-small {
+    order: 0;
+    margin-left: auto;
+
+    ul.navbar-nav {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}
+
 .hero_banner {
   position: relative;
   z-index: 0;
   height: 400px;
   overflow: hidden;
 
+  @include phone {
+    height: 320px;
+  }
+
   .img {
     height: 400px;
+
+    @include phone {
+      width: 100%;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -71,14 +113,26 @@
       text-transform: capitalize;
       max-width: 400px;
       margin: 10px 0;
+
+      @include phone {
+        font-size: 22px;
+      }
     }
 
     p {
       max-width: 450px;
+
+      @include phone {
+        font-size: 13px;
+      }
     }
 
     .btn {
       margin-top: 30px;
+
+      @include phone {
+        margin-top: 20px;
+      }
     }
   }
 }
@@ -91,24 +145,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  // position: relative;
-  // z-index: 0;
 
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   background-color: #000;
-  //   z-index: -1;
-  //   width: 100%;
-  //   height: 100%;
-  // }
+  @include phone {
+    height: 180px;
+  }
 
   h2 {
     font-size: 30px;
     font-weight: 700;
     text-transform: capitalize;
+
+    @include phone {
+      font-size: 22px;
+    }
   }
 }
 
@@ -158,4 +207,11 @@ span.profileBox {
   font-weight: 500;
   text-transform: uppercase;
   margin-right: 15px;
+
+  @include phone {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    margin-right: 10px;
+  }
 }

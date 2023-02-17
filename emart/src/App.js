@@ -10,10 +10,6 @@ const App = () => {
       <PersistGate persistor={persistor}>
         <Navigator />
       </PersistGate>
-
-      {/* <GoogleOAuthProvider clientId="126844737668-27d8g1qop8164vmev2mlulejmoph6n4q.apps.googleusercontent.com">
-        <App />
-      </GoogleOAuthProvider> */}
     </Provider>
   );
 };

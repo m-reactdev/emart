@@ -10,6 +10,6 @@ router.post("/create-product", createProduct);
 
 router.get("/fetch-products", fetchProducts);
 
-router.put("/api/update-products", updateProduct);
+router.put("/update-products", updateProduct);
 
 module.exports = router;

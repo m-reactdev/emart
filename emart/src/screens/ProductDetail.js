@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Banner from "../components/Banner";
 import Image from "../assets/imgs/banner.jpg";
 import {
@@ -17,7 +17,10 @@ import {
 import Rating from "../components/Rating";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../redux/actions/all-actions/ProductAction";
+import {
+  fetchProducts,
+  handlerReview,
+} from "../redux/actions/all-actions/ProductAction";
 import { addCartItems } from "../redux/actions/all-actions/CartAction";
 import { toast } from "react-toastify";
 
@@ -25,6 +28,8 @@ const ProductDetail = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   const [basicActive, setBasicActive] = useState("tab1");
+  const [rating, setRating] = useState(0);
+  const [text, setText] = useState("");
 
   let cartItems = useSelector(({ CartState }) => {
     return CartState.cartItems;
@@ -95,6 +100,50 @@ const ProductDetail = () => {
     dispatch(fetchProducts());
   }, []);
 
+  const handleValue = (e) => {
+    setRating(e.target.value);
+  };
+
+  const handleReview = () => {
+    if (authUser) {
+      if (rating > 0 && text !== "") {
+        let review = {
+          name: authUser.name,
+          rating: Number(rating),
+          text: text,
+        };
+
+        let newReviews = [...state.reviews];
+        newReviews.push(review);
+
+        let avgRating = [state.avgRating, Number(rating)];
+        const sum = avgRating.reduce((total, rating) => total + rating, 0);
+        const average = sum / avgRating.length;
+
+        let data = {
+          _id: state._id,
+          vendor_Id: state.vendor_Id,
+          vendor_Name: state.name,
+          vendor_Email: state.vendor_Name,
+          product_Id: state.product_Id,
+          imgUrl: state.imgUrl,
+          productName: state.productName,
+          category: state.category,
+          quantity: state.quantity,
+          price: state.price,
+          shortDesc: state.shortDesc,
+          description: state.description,
+          reviews: newReviews,
+          avgRating: average,
+        };
+
+        dispatch(handlerReview(data));
+      }
+    }
+
+    // console.log(data);
+  };
+
   return (
     <>
       <Banner title={state.productName} background={Image} />
@@ -159,12 +208,67 @@ const ProductDetail = () => {
                   );
                 })}
               </ul>
+
+              <div className="write_review_block">
+                <h3>Leave your experience</h3>
+                <div className="rating_select">
+                  <MDBRadio
+                    name="inlineRadio"
+                    id="inlineRadio1"
+                    value="1"
+                    onChange={handleValue}
+                    label="Very Poor"
+                    inline
+                  />
+                  <MDBRadio
+                    name="inlineRadio"
+                    id="inlineRadio2"
+                    value="2"
+                    onChange={handleValue}
+                    label="Poor"
+                    inline
+                  />
+                  <MDBRadio
+                    name="inlineRadio"
+                    id="inlineRadio3"
+                    value="3"
+                    onChange={handleValue}
+                    label="Good"
+                    inline
+                  />
+                  <MDBRadio
+                    name="inlineRadio"
+                    id="inlineRadio4"
+                    value="4"
+                    onChange={handleValue}
+                    label="Very Good"
+                    inline
+                  />
+                  <MDBRadio
+                    name="inlineRadio"
+                    id="inlineRadio5"
+                    value="5"
+                    onChange={handleValue}
+                    label="Excellent"
+                    inline
+                  />
+                </div>
+                <textarea
+                  placeholder="Review Message"
+                  rows="5"
+                  className="form-control"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                ></textarea>
+
+                <MDBBtn onClick={handleReview}>Submit</MDBBtn>
+              </div>
             </MDBTabsPane>
           </MDBTabsContent>
         </div>
         <div className="similar_products">
           <h5> You may also like</h5>
-          <div className="products_listing">
+          <div className="products_listing row">
             {ProductData.filter((element) => {
               return (
                 element.category === state.category &&

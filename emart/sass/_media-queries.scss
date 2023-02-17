@@ -1,0 +1,55 @@
+/*Mixins*/
+$desktop: 1366px;
+$laptop: 1200px;
+$laptop-mini: 1160px;
+$desktop-small: 992px;
+$desktop-mini: 768px;
+$tablet: 767px;
+$phone: 575px;
+$smallphone: 470px;
+$miniphone: 320px;
+@mixin desktop {
+  @media (max-width: #{$desktop}) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media (max-width: #{$laptop}) {
+    @content;
+  }
+}
+@mixin laptop-mini {
+  @media (max-width: #{$laptop-mini}) {
+    @content;
+  }
+}
+@mixin desktop-small {
+  @media (max-width: #{$desktop-small}) {
+    @content;
+  }
+}
+@mixin desktop-mini {
+  @media (max-width: #{$desktop-mini}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+@mixin phone {
+  @media (max-width: #{$phone}) {
+    @content;
+  }
+}
+@mixin smallphone {
+  @media (max-width: #{$smallphone}) {
+    @content;
+  }
+}
+@mixin miniphone {
+  @media (max-width: #{$miniphone}) {
+    @content;
+  }
+}

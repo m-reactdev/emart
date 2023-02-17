@@ -16,29 +16,53 @@ const Product = (props) => {
     return CartState.cartItems;
   });
 
+  let authUser = useSelector(({ AuthState }) => {
+    return AuthState.user;
+  });
+
   const addToCart = (item) => {
-    let cartData = {
-      title: item.productName,
-      imgUrl: item.imgUrl,
-      price: item.price,
-      product_Id: item.product_Id,
-      item_Id: item._id,
-      quantity: 1,
-    };
+    if (authUser) {
+      let cartData = {
+        title: item.productName,
+        imgUrl: item.imgUrl,
+        price: item.price,
+        unitPrice: item.price,
+        product_Id: item.product_Id,
+        item_Id: item._id,
+        quantity: 1,
+        user_id: authUser._id,
+        user_name: authUser.name,
+        user_email: authUser.email,
+      };
 
-    let duplicate = false;
+      let duplicate = false;
 
-    for (let i = 0; i < cartItems.length; i++) {
-      if (cartItems[i].item_Id === cartData.item_Id) {
-        duplicate = true;
-        break;
+      for (let i = 0; i < cartItems.length; i++) {
+        if (cartItems[i].item_Id === cartData.item_Id) {
+          duplicate = true;
+          break;
+        }
       }
-    }
 
-    if (!duplicate) {
-      dispatch(addCartItems(cartData));
+      if (!duplicate) {
+        dispatch(addCartItems(cartData));
+      } else {
+        toast.info("Item has already added in your cart.", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setTimeout(() => {
+          navigate("/cart");
+        }, 1500);
+      }
     } else {
-      toast.info("Item has already added in your cart.", {
+      toast.warn("You need to be logged in.", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -48,14 +72,11 @@ const Product = (props) => {
         progress: undefined,
         theme: "light",
       });
-      setTimeout(() => {
-        navigate("/cart");
-      }, 1500);
     }
   };
 
   return (
-    <MDBCol lg={3}>
+    <MDBCol xl={3} lg={4} md={6}>
       <div className="product_item">
         <div className="img">
           <img src={image} alt="" />

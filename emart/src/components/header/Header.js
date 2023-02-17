@@ -76,36 +76,10 @@ const Header = () => {
             <MDBNavbarBrand href="/">
               <img src={Logo} />
             </MDBNavbarBrand>
-            <MDBNavbarToggler
-              type="button"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-              onClick={() => setShowNav(!showNav)}
-            >
-              <MDBIcon icon="bars" fas />
-            </MDBNavbarToggler>
-            <MDBCollapse navbar show={showNav}>
+            <div className="admin_block">
               <MDBNavbarNav>
-                <MDBNavbarItem className="ms-auto">
-                  <MDBNavbarLink active aria-current="page" href="/">
-                    Home
-                  </MDBNavbarLink>
-                </MDBNavbarItem>
-                <MDBNavbarItem>
-                  <MDBNavbarLink href="/shop">Shop</MDBNavbarLink>
-                </MDBNavbarItem>
-                {authUser?.role === "Customer" ? null : (
-                  <MDBNavbarItem>
-                    <MDBNavbarLink href="/add-product">
-                      Add Product
-                    </MDBNavbarLink>
-                  </MDBNavbarItem>
-                )}
-                <MDBNavbarItem>
-                  <MDBNavbarLink href="/cart">Cart</MDBNavbarLink>
-                </MDBNavbarItem>
-                <MDBNavbarItem className="ms-auto me-2">
-                  <MDBNavbarLink href="#">
+                <MDBNavbarItem className="cart_item">
+                  <MDBNavbarLink href="/cart">
                     <MDBIcon fas icon="shopping-cart" />
                     <span className="itemSelected">{quantity}</span>
                   </MDBNavbarLink>
@@ -144,6 +118,36 @@ const Header = () => {
                     </MDBDropdownMenu>
                   </MDBDropdown>
                 )}
+              </MDBNavbarNav>
+            </div>
+            <MDBNavbarToggler
+              type="button"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              onClick={() => setShowNav(!showNav)}
+            >
+              <MDBIcon icon="bars" fas />
+            </MDBNavbarToggler>
+            <MDBCollapse navbar show={showNav}>
+              <MDBNavbarNav>
+                <MDBNavbarItem>
+                  <MDBNavbarLink active aria-current="page" href="/">
+                    Home
+                  </MDBNavbarLink>
+                </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/shop">Shop</MDBNavbarLink>
+                </MDBNavbarItem>
+                {authUser?.role === "Customer" ? null : (
+                  <MDBNavbarItem>
+                    <MDBNavbarLink href="/add-product">
+                      Add Product
+                    </MDBNavbarLink>
+                  </MDBNavbarItem>
+                )}
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/cart">Cart</MDBNavbarLink>
+                </MDBNavbarItem>
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>

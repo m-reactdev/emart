@@ -1,5 +1,5 @@
-@import "constant", "mixins", "header", "footer", "home", "product", "search",
-  "login-signup", "profile", "cart";
+@import "constant", "mixins", "media-queries", "header", "footer", "home",
+  "product", "search", "login-signup", "profile", "cart";
 
 body {
   color: color(text);
@@ -44,6 +44,11 @@ a:hover {
 
 .btn-primary {
   @include btnTheme;
+
+  @include phone {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
 }
 
 span.text-muted.txt-error {

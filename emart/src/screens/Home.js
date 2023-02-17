@@ -27,9 +27,9 @@ const Home = () => {
     dispatch(fetchProducts());
   }, []);
 
-  let timer;
-
   useEffect(() => {
+    let timer;
+
     timer = setInterval(() => {
       setSeconds(seconds + 1);
       if (seconds === 59) {
@@ -54,7 +54,7 @@ const Home = () => {
     }
 
     return () => clearInterval(timer);
-  }, [timer]);
+  });
 
   return (
     <>
@@ -183,7 +183,9 @@ const Home = () => {
           <div className="products_listing row">
             {ProductData.filter((element) => {
               return (
-                element.category === "wireless" || element.category === "mobile" || element.category === "watch"
+                element.category === "wireless" ||
+                element.category === "mobile" ||
+                element.category === "watch"
               );
             })
               .slice(0, 12)

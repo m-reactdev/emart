@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../components/constant/Constant";
+import { UPDATE_PRODUCT } from "../actions-types/ActionType";
 
 const addProduct = (data) => {
   return async (dispatch) => {
@@ -83,4 +84,47 @@ const viewItem = (item) => {
   };
 };
 
-export { addProduct, fetchProducts, viewItem };
+const handlerReview = (data) => {
+  return async (dispatch) => {
+    try {
+      let apiUrl = `${BASE_URL}/api/products/update-products`;
+
+      let response = await axios({
+        method: "PUT",
+        url: apiUrl,
+        data: data,
+      });
+
+      if (response) {
+        toast.success("Send review.", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        let products = response.data.data;
+        dispatch({
+          type: UPDATE_PRODUCT,
+          payload: products,
+        });
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+};
+
+export { addProduct, fetchProducts, viewItem, handlerReview };

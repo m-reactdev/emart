@@ -1,10 +1,12 @@
+import { LOGIN_USER, LOGOUT_USER, UPDATE_USER } from "../../actions/actions-types/ActionType";
+
 const INIT_STATE = {
   user: null,
 };
 
 const AuthReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
-    case "LOGIN_USER":
+    case LOGIN_USER:
       let authUser = action.payload;
 
       return {
@@ -12,7 +14,7 @@ const AuthReducer = (state = INIT_STATE, action) => {
         user: authUser,
       };
 
-    case "LOGOUT_USER":
+    case LOGOUT_USER:
       let emptyUser = null;
 
       return {
@@ -20,7 +22,7 @@ const AuthReducer = (state = INIT_STATE, action) => {
         user: emptyUser,
       };
 
-    case "UPDATE_USER":
+    case UPDATE_USER:
       let updateUser = action.payload;
 
       return {

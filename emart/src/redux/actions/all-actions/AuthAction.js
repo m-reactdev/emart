@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../components/constant/Constant";
+import { LOGIN_USER, LOGOUT_USER, UPDATE_USER } from "../actions-types/ActionType";
 
 const registerUser = (userData, clearForm) => {
   return async () => {
@@ -79,7 +80,7 @@ const loginUser = (user) => {
           theme: "light",
         });
         dispatch({
-          type: "LOGIN_USER",
+          type: LOGIN_USER,
           payload: userData,
         });
       }
@@ -126,7 +127,7 @@ const loginUser = (user) => {
 const logoutUser = () => {
   return (dispatch) => {
     dispatch({
-      type: "LOGOUT_USER",
+      type: LOGOUT_USER,
     });
 
     toast.success("You logged out..!", {
@@ -155,7 +156,7 @@ const updateUser = (user) => {
       if (response) {
         let userData = response.data.data;
         dispatch({
-          type: "UPDATE_USER",
+          type: UPDATE_USER,
           payload: userData,
         });
         console.log(response);

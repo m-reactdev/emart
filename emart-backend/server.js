@@ -12,7 +12,7 @@ app.use(cors());
 app.use(morgan("short"));
 
 app.use((req, res, next) => {
-  console.log("A request came: ", req.body);
+  // console.log("A request came: ", req.body);
   next();
 });
 

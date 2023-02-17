@@ -83,6 +83,8 @@ const updateProduct = async (req, res) => {
     price,
     shortDesc,
     description,
+    reviews,
+    avgRating,
   } = req.body;
 
   let updatedProduct = {
@@ -98,6 +100,8 @@ const updateProduct = async (req, res) => {
     price,
     shortDesc,
     description,
+    reviews,
+    avgRating,
   };
 
   ProductModel.findByIdAndUpdate(
@@ -109,7 +113,7 @@ const updateProduct = async (req, res) => {
         return res.status(200).send({
           status: true,
           message: "Product has been updated",
-          data: user,
+          data: product,
         });
       }
 

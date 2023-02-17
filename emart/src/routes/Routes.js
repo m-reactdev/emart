@@ -15,7 +15,6 @@ import Checkout from "../screens/Checkout";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
 import ProductDetail from "../screens/ProductDetail";
-import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Shop from "../screens/Shop";
 import Success from "../screens/Success";

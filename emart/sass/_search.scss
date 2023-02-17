@@ -4,15 +4,45 @@
   justify-content: space-between;
   margin: 0 -20px;
 
+  @include desktop-small {
+    margin: 0 -10px;
+  }
+
+  @include phone {
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+
   .search_filter {
     flex: 1;
     padding: 0 20px;
+
+    @include desktop-small {
+      padding: 0 10px;
+    }
+
+    @include phone {
+      padding: 10px 0;
+      flex: auto;
+      width: 100%;
+    }
   }
 
   .search_input {
     flex: 3;
     padding: 0 20px;
     display: flex;
+
+    @include desktop-small {
+      flex: 1;
+      padding: 0 10px;
+    }
+
+    @include phone {
+      padding: 10px 0;
+      flex: auto;
+      width: 100%;
+    }
 
     .btn {
       margin-left: 10px;
