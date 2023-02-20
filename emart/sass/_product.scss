@@ -1,3 +1,8 @@
+.loader {
+  text-align: center;
+  padding: 20px 0;
+}
+
 .products_block {
   padding: 30px 0;
 
@@ -147,30 +152,6 @@
       }
     }
 
-    .rating {
-      margin: 20px 0;
-      display: flex;
-      align-items: center;
-
-      @include phone {
-        margin: 10px 0;
-      }
-
-      .rate {
-        display: flex;
-        margin: 0 10px 0 -2px;
-
-        span {
-          margin: 0 2px;
-        }
-      }
-
-      p {
-        font-weight: 500;
-        opacity: 0.9;
-      }
-    }
-
     .price {
       display: flex;
       align-items: center;
@@ -196,6 +177,31 @@
       font-weight: 500;
       opacity: 0.8;
     }
+  }
+}
+
+.rating {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+
+  @include phone {
+    margin: 10px 0;
+  }
+
+  .rate {
+    display: flex;
+    margin: 0 10px 0 -2px;
+
+    span {
+      margin: 0 1px;
+      color: orange;
+    }
+  }
+
+  p {
+    font-weight: 500;
+    opacity: 0.9;
   }
 }
 
@@ -287,7 +293,7 @@
     max-width: 450px;
     margin: 0 auto 5px;
 
-    @include phone{
+    @include phone {
       font-size: 20px;
       line-height: normal;
       margin: 0 auto 0px;
@@ -299,7 +305,7 @@
     line-height: 22px;
     opacity: 0.7;
 
-    @include phone{
+    @include phone {
       font-size: 14px;
     }
   }

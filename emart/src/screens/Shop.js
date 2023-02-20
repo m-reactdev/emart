@@ -24,19 +24,19 @@ const Shop = () => {
     setCategory(e);
     setSearchText("");
 
-    if (filterValue === "Sofa") {
+    if (filterValue === "sofa") {
       let filterItem = ProductData.filter((e) => e.category === "sofa");
       setProduct(filterItem);
-    } else if (filterValue === "Mobile") {
+    } else if (filterValue === "mobile") {
       let filterItem = ProductData.filter((e) => e.category === "mobile");
       setProduct(filterItem);
-    } else if (filterValue === "Chair") {
-      let filterItem = ProductData.filter((e) => e.category === "chair");
+    } else if (filterValue === "mobile") {
+      let filterItem = ProductData.filter((e) => e.category === "mobile");
       setProduct(filterItem);
-    } else if (filterValue === "Watch") {
+    } else if (filterValue === "watch") {
       let filterItem = ProductData.filter((e) => e.category === "watch");
       setProduct(filterItem);
-    } else if (filterValue === "Wireless") {
+    } else if (filterValue === "wireless") {
       let filterItem = ProductData.filter((e) => e.category === "wireless");
       setProduct(filterItem);
     }

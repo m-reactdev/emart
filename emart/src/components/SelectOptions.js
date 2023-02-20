@@ -1,9 +1,9 @@
 const categoryOptions = [
-  { value: "Sofa", label: "Sofa" },
-  { value: "Mobile", label: "Mobile" },
-  { value: "Chair", label: "Chair" },
-  { value: "Watch", label: "Watch" },
-  { value: "Wireless", label: "Wireless" },
+  { value: "sofa", label: "Sofa" },
+  { value: "mobile", label: "Mobile" },
+  { value: "chair", label: "Chair" },
+  { value: "watch", label: "Watch" },
+  { value: "wireless", label: "Wireless" },
 ];
 
 const roleOptions = [

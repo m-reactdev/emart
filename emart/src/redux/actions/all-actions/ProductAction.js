@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { BASE_URL } from "../../../components/constant/Constant";
 import { UPDATE_PRODUCT } from "../actions-types/ActionType";
 
-const addProduct = (data) => {
+const addProduct = (data, clearForm) => {
   return async (dispatch) => {
     try {
       let apiUrl = `${BASE_URL}/api/products/create-product`;
@@ -25,6 +25,8 @@ const addProduct = (data) => {
           progress: undefined,
           theme: "light",
         });
+
+        clearForm();
       }
     } catch (error) {
       console.log(error);
@@ -84,7 +86,7 @@ const viewItem = (item) => {
   };
 };
 
-const handlerReview = (data) => {
+const handlerReview = (data,navigate) => {
   return async (dispatch) => {
     try {
       let apiUrl = `${BASE_URL}/api/products/update-products`;
@@ -111,6 +113,10 @@ const handlerReview = (data) => {
           type: UPDATE_PRODUCT,
           payload: products,
         });
+
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       }
     } catch (error) {
       toast.error(error.message, {

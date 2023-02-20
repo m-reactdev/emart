@@ -11,6 +11,7 @@ import ShippingBox from "../components/ShippingBox";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/actions/all-actions/ProductAction";
+import { ColorRing } from "react-loader-spinner";
 
 const Home = () => {
   let dispatch = useDispatch();
@@ -22,6 +23,8 @@ const Home = () => {
   let ProductData = useSelector(({ ProductState }) => {
     return ProductState.ProductData;
   });
+
+  // console.log(ProductData)
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -106,40 +109,80 @@ const Home = () => {
         <div className="products_block">
           <h2>Trending Products</h2>
           <div className="products_listing row">
-            {ProductData.filter((e) => e.category === "sofa")
-              .slice(0, 4)
-              .map((item, index) => {
-                return (
-                  <Product
-                    key={index}
-                    image={item.imgUrl.preview}
-                    title={item.productName}
-                    category={item.category}
-                    price={item.price}
-                    item={item}
-                  />
-                );
-              })}
+            {ProductData && ProductData.length > 0 ? (
+              ProductData.filter((e) => e.category === "sofa")
+                .slice(0, 4)
+                .map((item, index) => {
+                  return (
+                    <Product
+                      key={index}
+                      image={item.imgUrl.preview}
+                      title={item.productName}
+                      category={item.category}
+                      price={item.price}
+                      item={item}
+                    />
+                  );
+                })
+            ) : (
+              <div className="loader">
+                <ColorRing
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={[
+                    "#e15b64",
+                    "#f47e60",
+                    "#f8b26a",
+                    "#abbd81",
+                    "#849b87",
+                  ]}
+                />
+              </div>
+            )}
           </div>
         </div>
 
         <div className="products_block">
           <h2>Best Selling</h2>
           <div className="products_listing row">
-            {ProductData.filter((e) => e.category === "chair")
-              .slice(0, 4)
-              .map((item, index) => {
-                return (
-                  <Product
-                    key={index}
-                    image={item.imgUrl.preview}
-                    title={item.productName}
-                    category={item.category}
-                    price={item.price}
-                    item={item}
-                  />
-                );
-              })}
+            {ProductData && ProductData.length > 0 ? (
+              ProductData.filter((e) => e.category === "chair")
+                .slice(0, 4)
+                .map((item, index) => {
+                  return (
+                    <Product
+                      key={index}
+                      image={item.imgUrl.preview}
+                      title={item.productName}
+                      category={item.category}
+                      price={item.price}
+                      item={item}
+                    />
+                  );
+                })
+            ) : (
+              <div className="loader">
+                <ColorRing
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={[
+                    "#e15b64",
+                    "#f47e60",
+                    "#f8b26a",
+                    "#abbd81",
+                    "#849b87",
+                  ]}
+                />
+              </div>
+            )}
           </div>
         </div>
       </MDBContainer>
@@ -181,33 +224,53 @@ const Home = () => {
         <div className="products_block">
           <h2>New Arrivals</h2>
           <div className="products_listing row">
-            {ProductData.filter((element) => {
-              return (
-                element.category === "wireless" ||
-                element.category === "mobile" ||
-                element.category === "watch"
-              );
-            })
-              .slice(0, 12)
-              .map((item, index) => {
+            {ProductData && ProductData.length > 0 ? (
+              ProductData.filter((element) => {
                 return (
-                  <Product
-                    key={index}
-                    image={item.imgUrl.preview}
-                    title={item.productName}
-                    category={item.category}
-                    price={item.price}
-                    item={item}
-                  />
+                  element.category === "wireless" ||
+                  element.category === "mobile" ||
+                  element.category === "watch"
                 );
-              })}
+              })
+                .slice(0, 12)
+                .map((item, index) => {
+                  return (
+                    <Product
+                      key={index}
+                      image={item.imgUrl.preview}
+                      title={item.productName}
+                      category={item.category}
+                      price={item.price}
+                      item={item}
+                    />
+                  );
+                })
+            ) : (
+              <div className="loader">
+                <ColorRing
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={[
+                    "#e15b64",
+                    "#f47e60",
+                    "#f8b26a",
+                    "#abbd81",
+                    "#849b87",
+                  ]}
+                />
+              </div>
+            )}
           </div>
         </div>
 
         {/* <div className="products_block">
           <h2>Popular in Category</h2>
           <div className="products_listing row">
-            {ProductData.filter((e) => e.category === "watch")
+            {ProductData?.filter((e) => e.category === "watch")
               .slice(0, 4)
               .map((item, index) => {
                 return (

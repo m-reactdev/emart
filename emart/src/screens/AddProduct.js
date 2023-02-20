@@ -21,6 +21,7 @@ import { addProduct } from "../redux/actions/all-actions/ProductAction";
 const AddProduct = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
+
   let authUser = useSelector(({ AuthState }) => {
     return AuthState.user;
   });
@@ -43,6 +44,20 @@ const AddProduct = () => {
     shortDesc,
     description,
   } = data;
+
+  const clearForm = () => {
+    setData({
+      productName: "",
+      imgUrl: null,
+      category: null,
+      quantity: "",
+      price: "",
+      shortDesc: "",
+      description: "",
+    });
+
+    console.log(data);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -126,22 +141,23 @@ const AddProduct = () => {
         vendor_Name: authUser.name,
         vendor_Email: authUser.email,
         product_Id: Math.floor(1000 + Math.random() * 9000),
-        imgUrl,
-        productName,
-        category,
-        quantity,
-        price,
-        shortDesc,
-        description,
+        imgUrl: imgUrl,
+        productName: productName,
+        category: category?.value,
+        quantity: quantity,
+        price: parseInt(price),
+        shortDesc: shortDesc,
+        description: description,
       };
+
       if (
         data.productName !== "" &&
-        data.category !== null &&
+        data.category !== "" &&
         data.price !== "" &&
         data.description !== "" &&
         data.imgUrl !== null
       ) {
-        dispatch(addProduct(data));
+        dispatch(addProduct(data, clearForm));
       } else {
         toast.warn("Please fill required fields.", {
           position: "top-right",
@@ -205,11 +221,11 @@ const AddProduct = () => {
                 <div className="form-group">
                   <Select
                     isClearable={true}
-                    defaultValue={category}
+                    value={category}
                     onChange={(event) =>
                       setData((prevState) => ({
                         ...prevState,
-                        category: event.value,
+                        category: event,
                       }))
                     }
                     options={categoryOptions}

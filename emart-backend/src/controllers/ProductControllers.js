@@ -71,7 +71,7 @@ const fetchProducts = (req, res) => {
 
 const updateProduct = async (req, res) => {
   let {
-    id,
+    _id,
     vendor_Id,
     vendor_Name,
     vendor_Email,
@@ -88,24 +88,24 @@ const updateProduct = async (req, res) => {
   } = req.body;
 
   let updatedProduct = {
-    id,
-    vendor_Id,
-    vendor_Name,
-    vendor_Email,
-    product_Id,
-    productName,
-    imgUrl,
-    category,
-    quantity,
-    price,
-    shortDesc,
-    description,
-    reviews,
-    avgRating,
+    _id: _id,
+    vendor_Id: vendor_Id,
+    vendor_Name: vendor_Name,
+    vendor_Email: vendor_Email,
+    product_Id: product_Id,
+    productName: productName,
+    imgUrl: imgUrl,
+    category: category,
+    quantity: quantity,
+    price: price,
+    shortDesc: shortDesc,
+    description: description,
+    reviews: reviews,
+    avgRating: avgRating,
   };
 
   ProductModel.findByIdAndUpdate(
-    id,
+    _id,
     updatedProduct,
     { new: true },
     (err, product) => {

@@ -29,11 +29,13 @@ const ProductReducer = (state = INIT_STATE, action) => {
 
     case UPDATE_PRODUCT:
       let updateProduct = [...state.ProductData];
-      updateProduct.push(action.payload);
+      updateProduct.splice(action.payload.product_Id, 1, action.payload);
+      let updateItem = action.payload;
 
       return {
         ...state,
         ProductData: updateProduct,
+        viewItem: updateItem,
       };
 
     default:

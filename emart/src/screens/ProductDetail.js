@@ -13,7 +13,7 @@ import {
   MDBRadio,
   MDBCol,
 } from "mdb-react-ui-kit";
-
+import { ColorRing } from "react-loader-spinner";
 import Rating from "../components/Rating";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from "react-redux";
@@ -137,11 +137,20 @@ const ProductDetail = () => {
           avgRating: average,
         };
 
-        dispatch(handlerReview(data));
+        dispatch(handlerReview(data, navigate));
+      } else {
+        toast.warn("Please fill all required fields.", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     }
-
-    // console.log(data);
   };
 
   return (
@@ -201,7 +210,7 @@ const ProductDetail = () => {
                 {state.reviews.map((item, index) => {
                   return (
                     <li className="review_item" key={index}>
-                      <h5>John Deo</h5>
+                      <h5>{item.name}</h5>
                       <h4>{item.rating} (rating)</h4>
                       <p>{item.text}</p>
                     </li>
@@ -269,25 +278,45 @@ const ProductDetail = () => {
         <div className="similar_products">
           <h5> You may also like</h5>
           <div className="products_listing row">
-            {ProductData.filter((element) => {
-              return (
-                element.category === state.category &&
-                element.productName !== state.productName
-              );
-            })
-              .slice(0, 4)
-              .map((item, index) => {
+            {ProductData && ProductData.length > 0 ? (
+              ProductData.filter((element) => {
                 return (
-                  <Product
-                    key={index}
-                    image={item.imgUrl.preview}
-                    title={item.productName}
-                    category={item.category}
-                    price={item.price}
-                    item={item}
-                  />
+                  element?.category === state.category &&
+                  element?.productName !== state.productName
                 );
-              })}
+              })
+                .slice(0, 4)
+                .map((item, index) => {
+                  return (
+                    <Product
+                      key={index}
+                      image={item.imgUrl.preview}
+                      title={item.productName}
+                      category={item.category}
+                      price={item.price}
+                      item={item}
+                    />
+                  );
+                })
+            ) : (
+              <div className="loader">
+                <ColorRing
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={[
+                    "#e15b64",
+                    "#f47e60",
+                    "#f8b26a",
+                    "#abbd81",
+                    "#849b87",
+                  ]}
+                />
+              </div>
+            )}
           </div>
         </div>
       </MDBContainer>
