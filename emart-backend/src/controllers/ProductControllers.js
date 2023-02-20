@@ -125,4 +125,22 @@ const updateProduct = async (req, res) => {
   );
 };
 
-module.exports = { createProduct, fetchProducts, updateProduct };
+const deleteProduct = async (req, res) => {
+  let { id } = req.params;
+
+  ProductModel.findByIdAndRemove(id, (err) => {
+    if (!err) {
+      return res.status(200).send({
+        status: true,
+        message: "Product has been deleted",
+      });
+    }
+
+    return res.status(500).send({
+      status: false,
+      message: "Server Issues",
+    });
+  });
+};
+
+module.exports = { createProduct, fetchProducts, updateProduct, deleteProduct };

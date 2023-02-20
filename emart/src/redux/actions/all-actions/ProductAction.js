@@ -1,7 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../components/constant/Constant";
-import { UPDATE_PRODUCT } from "../actions-types/ActionType";
+import {
+  DELETE_PRODUCT,
+  UPDATE_PRODUCT,
+  VIEW_PRODUCT,
+} from "../actions-types/ActionType";
 
 const addProduct = (data, clearForm) => {
   return async (dispatch) => {
@@ -80,13 +84,55 @@ const fetchProducts = () => {
 const viewItem = (item) => {
   return (dispatch) => {
     dispatch({
-      type: "VIEW_PRODUCT",
+      type: VIEW_PRODUCT,
       payload: item,
     });
   };
 };
 
-const handlerReview = (data,navigate) => {
+const deleteItem = (item) => {
+  return async (dispatch) => {
+    dispatch({
+      type: DELETE_PRODUCT,
+      payload: item,
+    });
+
+    try {
+      let apiUrl = `${BASE_URL}/api/products/delete-products/${item._id}`;
+
+      let response = await axios({
+        method: "DELETE",
+        url: apiUrl,
+      });
+
+      if (response) {
+        toast.success(response.data.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+};
+
+const handlerReview = (data, navigate) => {
   return async (dispatch) => {
     try {
       let apiUrl = `${BASE_URL}/api/products/update-products`;
@@ -115,7 +161,7 @@ const handlerReview = (data,navigate) => {
         });
 
         setTimeout(() => {
-          navigate("/");
+          window.location.reload();
         }, 1500);
       }
     } catch (error) {
@@ -133,4 +179,4 @@ const handlerReview = (data,navigate) => {
   };
 };
 
-export { addProduct, fetchProducts, viewItem, handlerReview };
+export { addProduct, fetchProducts, deleteItem, viewItem, handlerReview };

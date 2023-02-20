@@ -135,6 +135,11 @@ const Header = () => {
                     Home
                   </MDBNavbarLink>
                 </MDBNavbarItem>
+                {authUser?.role === "Admin" ? (
+                  <MDBNavbarItem>
+                    <MDBNavbarLink href="/dashboard">Dashboard</MDBNavbarLink>
+                  </MDBNavbarItem>
+                ) : null}
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/shop">Shop</MDBNavbarLink>
                 </MDBNavbarItem>

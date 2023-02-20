@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsPlusCircleFill } from "react-icons/bs";
+import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { viewItem } from "../redux/actions/all-actions/ProductAction";
+import {
+  deleteItem,
+  viewItem,
+} from "../redux/actions/all-actions/ProductAction";
 import { addCartItems } from "../redux/actions/all-actions/CartAction";
 import { toast } from "react-toastify";
 import { MDBCol } from "mdb-react-ui-kit";
@@ -92,9 +96,29 @@ const Product = (props) => {
         <p>{category}</p>
         <h3>${price}</h3>
 
-        <Link className="add_btn" onClick={() => addToCart(item)}>
-          <BsPlusCircleFill />
-        </Link>
+        {authUser?.role === "Admin" ? (
+          <>
+            <div className="icons_block">
+              <Link
+                onClick={() => dispatch(deleteItem(item))}
+                className="del_icon"
+              >
+                <MdDelete />
+              </Link>
+              <Link className="add_btn" onClick={() => addToCart(item)}>
+                <BsPlusCircleFill />
+              </Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="icons_block">
+              <Link className="add_btn" onClick={() => addToCart(item)}>
+                <BsPlusCircleFill />
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </MDBCol>
   );

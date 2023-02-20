@@ -66,15 +66,26 @@
     }
   }
 
-  a.add_btn {
+  .icons_block {
     position: absolute;
-    right: 20px;
+    right: 0;
     bottom: -5px;
-    font-size: 24px;
-    color: color(theme);
+    display: flex;
+    align-items: center;
 
     @include tablet {
       position: unset;
+      justify-content: center;
+    }
+
+    a {
+      font-size: 24px;
+      display: block;
+      margin-left: 5px;
+
+      @include tablet {
+        margin: 10px 5px;
+      }
     }
   }
 }

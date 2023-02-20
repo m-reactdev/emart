@@ -28,7 +28,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [ProductData]);
 
   useEffect(() => {
     let timer;

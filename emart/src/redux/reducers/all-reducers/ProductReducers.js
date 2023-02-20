@@ -1,4 +1,5 @@
 import {
+  DELETE_PRODUCT,
   FETCH_PRODUCTS,
   UPDATE_PRODUCT,
   VIEW_PRODUCT,
@@ -28,14 +29,20 @@ const ProductReducer = (state = INIT_STATE, action) => {
       };
 
     case UPDATE_PRODUCT:
-      let updateProduct = [...state.ProductData];
-      updateProduct.splice(action.payload.product_Id, 1, action.payload);
       let updateItem = action.payload;
 
       return {
         ...state,
-        ProductData: updateProduct,
         viewItem: updateItem,
+      };
+
+    case DELETE_PRODUCT:
+      let cloneProduct = [...state.ProductData];
+      cloneProduct.splice(action.payload._id, 1);
+
+      return {
+        ...state,
+        ProductData: cloneProduct,
       };
 
     default:

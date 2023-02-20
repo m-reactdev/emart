@@ -43,6 +43,9 @@ const Shop = () => {
   };
 
   const searchHandler = (e) => {
+    if (e) {
+      setCategory(null);
+    }
     let filterValue = e.target.value;
     setSearchText(filterValue);
 
@@ -56,7 +59,7 @@ const Shop = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [ProductData]);
 
   return (
     <>
@@ -65,7 +68,7 @@ const Shop = () => {
         <div className="search_block">
           <div className="search_filter">
             <Select
-              defaultValue={category}
+              value={category}
               onChange={handleChange}
               options={categoryOptions}
               placeholder="Select Category"
