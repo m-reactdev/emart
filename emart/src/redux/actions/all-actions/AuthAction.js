@@ -1,12 +1,15 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../../components/constant/Constant";
-import { LOGIN_USER, LOGOUT_USER, UPDATE_USER } from "../actions-types/ActionType";
+import {
+  LOGIN_USER,
+  LOGOUT_USER,
+  UPDATE_USER,
+} from "../actions-types/ActionType";
 
 const registerUser = (userData, clearForm) => {
   return async () => {
     try {
-      let apiUrl = `${BASE_URL}/api/users/user-create`;
+      let apiUrl = `/api/users/user-create`;
       let response = await axios({
         method: "POST",
         url: apiUrl,
@@ -59,7 +62,7 @@ const registerUser = (userData, clearForm) => {
 const loginUser = (user) => {
   return async (dispatch) => {
     try {
-      let apiUrl = `${BASE_URL}/api/users/login-user`;
+      let apiUrl = `/api/users/login-user`;
 
       let response = await axios({
         method: "POST",
@@ -146,7 +149,7 @@ const logoutUser = () => {
 const updateUser = (user) => {
   return async (dispatch) => {
     try {
-      let apiUrl = `${BASE_URL}/api/update-user`;
+      let apiUrl = `/api/update-user`;
       let response = await axios({
         method: "PUT",
         url: apiUrl,

@@ -16,7 +16,7 @@ import { roleOptions } from "../components/SelectOptions";
 const Register = () => {
   let dispatch = useDispatch();
   const [name, setName] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkValidEmail, setCheckValidEmail] = useState(false);
@@ -26,13 +26,13 @@ const Register = () => {
 
   let clearForm = () => {
     setName("");
-    setRole("");
+    setRole(null);
     setEmail("");
     setPassword("");
   };
 
   const handleChange = (e) => {
-    let filterValue = e.value;
+    let filterValue = e;
     setRole(filterValue);
   };
 
@@ -41,9 +41,10 @@ const Register = () => {
       name: name,
       email: email,
       password: password,
-      role: role,
+      role: role && role.value,
       profileImage: null,
     };
+
     if (name !== "" && !checkValidEmail && !checkValidPassword) {
       dispatch(registerUser(userData, clearForm));
     } else {
@@ -80,7 +81,7 @@ const Register = () => {
             </div>
             <div className="form_group">
               <Select
-                defaultValue={role}
+                value={role}
                 onChange={handleChange}
                 options={roleOptions}
                 placeholder="Select Role"

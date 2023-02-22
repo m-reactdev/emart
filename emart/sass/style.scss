@@ -119,11 +119,12 @@ span.text-muted.txt-error {
   color: color(text) !important;
   font-size: 14px;
   font-weight: 400;
+  padding-top: 8px;
 }
 
 .form-outline .form-control:focus ~ .form-label,
 .form-outline .form-control.active ~ .form-label {
-  padding-top: 0.37rem;
+  padding-top: 6px;
 }
 
 .form-control::placeholder {

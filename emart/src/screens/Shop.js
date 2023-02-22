@@ -7,6 +7,7 @@ import Product from "../components/Product";
 import { categoryOptions } from "../components/SelectOptions";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/actions/all-actions/ProductAction";
+import { ColorRing } from "react-loader-spinner";
 
 const Shop = () => {
   let dispatch = useDispatch();
@@ -17,7 +18,8 @@ const Shop = () => {
 
   const [category, setCategory] = useState(null);
   const [searchText, setSearchText] = useState("");
-  const [product, setProduct] = useState(ProductData);
+  const [error, setError] = useState("");
+  const [product, setProduct] = useState([]);
 
   const handleChange = (e) => {
     let filterValue = e.value;
@@ -54,11 +56,15 @@ const Shop = () => {
     );
 
     if (filterItem.length > 0) setProduct(filterItem);
-    else setProduct([]);
+    else {
+      setProduct([]);
+      setError("No Data Found.");
+    }
   };
 
   useEffect(() => {
     dispatch(fetchProducts());
+    setProduct(ProductData);
   }, [ProductData]);
 
   return (
@@ -94,8 +100,18 @@ const Shop = () => {
           </div>
         </div>
         <div className="products_listing row mb-md-5">
-          {product.length === 0 ? (
-            <p className="emptyData">No Data Found...!</p>
+          {ProductData.length === 0 ? (
+            <div className="loader">
+              <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+              />
+            </div>
           ) : (
             product.map((item, index) => {
               return (
@@ -110,6 +126,8 @@ const Shop = () => {
               );
             })
           )}
+
+          {product.length === 0 && <p className="emptyData">{error}</p>}
         </div>
       </MDBContainer>
     </>

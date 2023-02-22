@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../../components/constant/Constant";
 import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
@@ -10,7 +9,7 @@ import {
 const addProduct = (data, clearForm) => {
   return async (dispatch) => {
     try {
-      let apiUrl = `${BASE_URL}/api/products/create-product`;
+      let apiUrl = `/api/products/create-product`;
 
       let response = await axios({
         method: "POST",
@@ -51,7 +50,7 @@ const addProduct = (data, clearForm) => {
 const fetchProducts = () => {
   return async (dispatch) => {
     try {
-      let apiUrl = `${BASE_URL}/api/products/fetch-products`;
+      let apiUrl = `/api/products/fetch-products`;
 
       let response = await axios({
         method: "GET",
@@ -98,7 +97,7 @@ const deleteItem = (item) => {
     });
 
     try {
-      let apiUrl = `${BASE_URL}/api/products/delete-products/${item._id}`;
+      let apiUrl = `/api/products/delete-products/${item._id}`;
 
       let response = await axios({
         method: "DELETE",
@@ -135,7 +134,7 @@ const deleteItem = (item) => {
 const handlerReview = (data, navigate) => {
   return async (dispatch) => {
     try {
-      let apiUrl = `${BASE_URL}/api/products/update-products`;
+      let apiUrl = `/api/products/update-products`;
 
       let response = await axios({
         method: "PUT",
