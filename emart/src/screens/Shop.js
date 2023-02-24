@@ -29,8 +29,8 @@ const Shop = () => {
     if (filterValue === "sofa") {
       let filterItem = ProductData.filter((e) => e.category === "sofa");
       setProduct(filterItem);
-    } else if (filterValue === "mobile") {
-      let filterItem = ProductData.filter((e) => e.category === "mobile");
+    } else if (filterValue === "chair") {
+      let filterItem = ProductData.filter((e) => e.category === "chair");
       setProduct(filterItem);
     } else if (filterValue === "mobile") {
       let filterItem = ProductData.filter((e) => e.category === "mobile");
@@ -63,8 +63,11 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchProducts());
     setProduct(ProductData);
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
   }, [ProductData]);
 
   return (
